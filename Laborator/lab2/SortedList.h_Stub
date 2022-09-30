@@ -1,0 +1,39 @@
+#ifndef SORTED_LIST_H
+#define SORTED_LIST_H
+
+#include <stdlib.h>
+#include <assert.h>
+
+/*
+  IMPORTANT!
+
+  As we stick to pure C, we cannot use templates. We will just asume
+  some type T was previously defined.
+*/
+
+// -----------------------------------------------------------------------------
+
+typedef struct SortedList {
+  T value;
+  struct SortedList* next;
+} SortedList;
+
+// TODO : Cerința 1 & Cerința 2
+
+void init(SortedList** lst) { ; }
+
+int isEmpty(SortedList* lst) { return 0; }
+
+void insert(SortedList** lst, T x) { ; }
+
+long length(SortedList* lst) { ; }
+
+T getNth(SortedList* lst, long N) { ; }
+
+int contains(SortedList* lst, T x) { return 0; }
+
+void deleteOnce(SortedList** lst, T x) { ; }
+
+void freeSortedList(SortedList** lst) { ; }
+
+#endif
