@@ -1,0 +1,62 @@
+    Programul este impartit in 3 fisiere: doua de tip header si main-ul
+
+    Primul header (Structuri.h) include cele 2 structuri ce se utilizeaza in implementarea
+grafului: TGraph care include numarul de noduri si vectorul de noduri
+si TNode care reprezinta nodurile listelor de adiacenta, acestea avand
+un nume si un link catre urmatorul nod
+
+    Al 2lea header (Functions.h) contine functiile utilizate in rezolvarea temei
+
+In fisierul main se deschid fisierele de input si output si se creeaza graful
+In functie de argumentele primite in linia de comanda se apeleaza functiile specifice
+
+Functii:
+
+- create_graph
+    # functia aloca memorie pentru graful g si vectorul arr
+    # citind datele din fisierul f_in, se completeaza vectorul si listele de adiacenta
+        utilizand functia create_node si get_idx
+    # se foloseste functia sort pentru a ordona crescator elementele in vectorul arr
+
+- dfs_node
+    # algoritmul face parcurgerea clasica in adancime trecand prin toate nodurile grafului
+        incepand cu nodul de start pe care il primeste ca parametru
+    # functia primeste ca parametru si un ok care devine 0 daca in timpul parcurgerii
+        se ajunge din nou in nodul de start, moment in care functia da return iar graful
+        este considerat ciclic
+
+- verify_ciclic_graph
+    # functia apeleaza dfs_node din fiecare nod si in functie de valoarea lui ok de la
+        finalul executiei decide daca graful este sau nu ciclic, dupa care face scrierea
+        in fisierul de output
+
+- past
+    # functia apeleaza dfs_node din nodul primit ca parametru
+    # parcurg vectorul de visited completat in urma apelului functiei dfs_node
+    # daca visited[i] == 1 si i este diferit de indexul nodului de start, se printeaza
+        numele nodului de pe pozitia index si se completeaza cu 1 vectorul de retur pe
+        pozitia i
+
+- future
+    # aplic dfs_node din fiecare nod diferit de nodul de start
+    # parcurg vectorul de visited rezultat in urma fiecarui apel al functiei dfs_node
+        iar daca pe pozitia idx este 1 (adica exista o cale de la nodul de pe pozitia i
+        la nodul de pe pozitia idx) atunci printez numele nodului i in fisierul de output
+        si pun 1 pe pozitia i in vectorul de retur
+
+- anticone
+    # folosesc cei 2 vectori rezultati in urma apelurilor functiilor anterioare (v_past si
+        v_future)
+    # parcurg acesti 2 vectori simultan si in cazul in care, pe o pozitie, ambele valori
+        sunt 0 (acel nod nu face parte nici din past nici din future), ii scriu numele in
+        fisierul de output si pun valoarea 1 pe pozitia i in vectorul de retur
+
+- tips
+    # pentru fiecare nod din graf se apeleaza functia de dfs fara printare din fiecare nod
+    # daca toate valorile vectorului rezultat sunt 0 inseamna ce nodul nu are niciun future
+        deci ii printez numele in fisierul de output si pun 1 pe pozitia i in vectorul de 
+        retur
+
+- free_graph
+    # eliberez memoria pentru fiecare lista de adiacenta apelnad functia delete_list
+    # eliberez memoria pentru vectorul arr si in final pentru g
